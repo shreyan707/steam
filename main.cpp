@@ -1,2 +1,2 @@
-#include<iostrem>
+#include<iostream>
 #include<string>
