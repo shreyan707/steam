@@ -2,7 +2,7 @@
 #include<string>
 #include<fstream>
 using namespace std;
-int main()
+void search()
 {
     string game_name;
     fstream game_finder;
@@ -29,4 +29,7 @@ int main()
         cout << "Games database is empty!";
     }
 
+}
+int main () {
+    search();
 }
