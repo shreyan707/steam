@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 using namespace std;
 
 void search();
@@ -131,6 +132,7 @@ void after_login()
     cout << "| Press 1 to view Recommended Games           |" << endl;
     cout << "| Press 2 to view Trending Games              |" << endl; // add more features
     cout << "| Press 3 to Search Games                     |" << endl;
+    cout << "| press 4 to access Wallet                    |" << endl;
     cout << "\n ENTER YOUR CHOICE : ";
     cin >> choices;
     switch (choices)
@@ -143,6 +145,9 @@ void after_login()
     case 3 :
         search();
         break;
+    case 4:
+        wallet();
+        break;
       
    
     default:
@@ -152,10 +157,12 @@ void after_login()
         main();
     }
 }
+string wal;
+string userID, password, id, pass;
 void login()
 {
     int count;
-    string userID, password, id, pass;
+    
     system("cls");
     cout << "\t\t\t Please enter the username and password :" << endl;
     cout << "\t\t\t USERNAME ";
@@ -165,7 +172,7 @@ void login()
 
     ifstream input("records.txt");
 
-    while (input >> id >> pass)
+    while (input >> id >> pass >> wal)
     {
         if (id == userID && pass == password)
         {
@@ -186,10 +193,10 @@ void login()
         main();
     }
 }
-
+string suserID, spassword, sid, spass;
 void signin()
 {
-    string suserID, spassword, sid, spass;
+
     system("cls");
     cout << "\t\t\t Enter the username : ";
     cin >> suserID;
@@ -223,7 +230,7 @@ void forgot()
         cin >> fuserID;
 
         ifstream f2("records.txt");
-        while (f2 >> fID >> fpass)
+        while (f2 >> fID >> fpass >> wal)
         {
             if (fID == fuserID)
             {
@@ -261,9 +268,70 @@ void forgot()
 
 void wallet()
 {
-    
-}
+    cout<<"xxxxxxxxxxxxxxxx WALLET FEATURES XXXXXXXXXXXXXXXXXXXXXX "<<endl;
+    cout<<" 1. View Wallet Balance"<<endl;
+    cout<<" 2. Add Balance"<< endl;
+    cout<<" 3. Back"<<endl;
+    cout<<" Enter your choice: "<<endl;
+    int ch;
+    cin>> ch;
+    switch(ch)
+    {
+        case 1:
+            cout<<"Wallet Balance For: "<< userID <<endl;
+            cout<<wal<<endl;
+            break;
+        case 2:
+            int balance;
+            int add;
+            balance=stoi(wal);
+            cout<<"Enter amount to be added: "<<endl;
+            cin >> add;
+            balance=balance+add;    
 
+            string filen="records.txt";
+            fstream file(filen);
+            string line;
+            string a,b,c;
+            string input=userID;
+            fstream tempfile("temp.txt");
+            string a2,b2,c2;
+
+            while(getline(file,line))
+            {
+                istringstream linevar(line);
+                linevar >> a >> b >>c;
+                if(a!=input)
+                {
+                    tempfile<<line<<endl;   
+                }
+                else
+                {
+                    a2=a;
+                    b2=b;
+                    c2=c;
+                }
+            }
+            string c3=to_string(balance);
+            tempfile<<a2<<" "<<b2<<" "<<c3<<endl;
+            tempfile.close();
+            file.close();
+            ofstream ofs;
+            ofs.open("records.txt",ofstream::out | ofstream::trunc);
+            ofs.close();
+            fstream file2("temp.txt");
+            string line2;
+            fstream file3("records.txt");
+            while(getline(file2,line2))
+            {
+                file3<<line2<<endl;
+            }
+
+}
+        }
+
+
+            
 /*void library()
 {
     cout<<"OPTIONS: "<<endl;
