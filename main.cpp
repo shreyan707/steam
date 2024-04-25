@@ -14,7 +14,7 @@ void search()
       bool found = false;
       while(!game_finder.eof()){
         game_finder >> game >> price >> genre;
-        if( game == game_name){
+        if( game == game_name) {
             cout << "The game you searched for is : " << game << " Price : " << price;
             cout << " Genre : " << genre;
             found = true;

@@ -1,6 +1,6 @@
-shreyan 12345 0 nil nil nil
 ViLLAiN billa9 0 nil nil nil
-gaminizer arnav 0 nil nil nil
 gruberrora 02052005 0 nil nil nil
 abcde abcde 0 nil nil nil
-abc abc 0 nil nil nil
+shreyan 12345 1200 nil nil nil
+gaminizer arnav 0 nil you_have_a_friend_request_from_shreyan_accpet?_(y/n) nil
+abc abc 0 nil you_have_a_friend_request_from_gaminizer_accpet?_(y/n) nil

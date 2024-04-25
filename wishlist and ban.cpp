@@ -7,7 +7,7 @@ using namespace std;
 // Define a structure for game items
 struct Game {
     string title;
-    string description;
+    string genre;
     float price;
 };
 
@@ -25,10 +25,11 @@ public:
     void displayGames() const {
         if (games.empty()) {
             cout << "Wishlist is empty." << endl;
-        } else {
+        } 
+        else {
             cout << "Wishlist Games:" << endl;
             for (const auto& game : games) {
-                cout << "Title: " << game.title << ", Description: " << game.description << ", Price: $" << game.price << endl;
+                cout << "Title: " << game.title << ", Genre: " << game.genre << ", Price: ₹" << game.price << endl;
             }
         }
     }
@@ -63,12 +64,12 @@ public:
 
 int main() {
     Wishlist myWishlist;
-    string title1,discription1,title2,description2;
+    string title1,discription1,title2,genre1,genre2;
     float p1,p2;
     cin>>title1;
     cin>>title2;
-    cin>>description1;
-    cin>>description2;
+    cin>>genre1;
+    cin>>genre2;
     
     myWishlist.addGame(game1);
     myWishlist.addGame(game2);

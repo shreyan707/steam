@@ -1,0 +1,118 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+void trending() {
+    srand(time(0)); 
+    vector<string> gameNames = {
+    "Fortnite",
+    "Call of Duty: Warzone",
+    "Among Us",
+    "Valorant",
+    "Minecraft",
+    "Grand Theft Auto V",
+    "Red Dead Redemption 2",
+    "PlayerUnknown's Battlegrounds",
+    "Rocket League",
+    "Apex Legends",
+    "League of Legends",
+    "Counter-Strike: Global Offensive",
+    "Overwatch",
+    "The Witcher 3: Wild Hunt",
+    "Rainbow Six Siege",
+    "Destiny 2",
+    "Dota 2",
+    "FIFA 21",
+    "World of Warcraft",
+    "Assassin's Creed Valhalla",
+    "Cyberpunk 2077",
+    "Genshin Impact",
+    "Super Smash Bros. Ultimate",
+    "Hades",
+    "Animal Crossing: New Horizons",
+    "The Last of Us Part II",
+    "Final Fantasy VII Remake",
+    "Ghost of Tsushima",
+    "God of War",
+    "The Legend of Zelda: Breath of the Wild",
+    "Dark Souls III",
+    "Bloodborne",
+    "Sekiro: Shadows Die Twice",
+    "Monster Hunter: World",
+    "Persona 5",
+    "NieR: Automata",
+    "The Elder Scrolls V: Skyrim",
+    "Fallout 4",
+    "DOOM Eternal",
+    "Star Wars Jedi: Fallen Order",
+    "Half-Life: Alyx",
+    "Resident Evil 2 Remake",
+    "The Outer Worlds",
+    "Control",
+    "Death Stranding",
+    "No Man's Sky",
+    "Disco Elysium",
+    "Outer Wilds",
+    "Celeste",
+    "Slay the Spire",
+    "Into the Breach",
+    "Dead Cells",
+    "Cuphead",
+    "Hollow Knight",
+    "Stardew Valley",
+    "Terraria",
+    "RimWorld",
+    "Factorio",
+    "Cities: Skylines",
+    "Age of Empires II: Definitive Edition",
+    "Crusader Kings III",
+    "Europa Universalis IV",
+    "Civilization VI",
+    "Total War: Three Kingdoms",
+    "XCOM 2",
+    "Stellaris",
+    "Hearts of Iron IV",
+    "Crash Bandicoot 4: It's About Time",
+    "Tony Hawk's Pro Skater 1+2",
+    "Demon's Souls",
+    "Final Fantasy XIV",
+    "The Sims 4",
+    "Madden NFL 21",
+    "NBA 2K21",
+    "NHL 21",
+    "MLB The Show 21",
+    "WWE 2K Battlegrounds",
+    "Mortal Kombat 11",
+    "Street Fighter V",
+    "Tekken 7",
+    "Dragon Ball FighterZ",
+    "Guilty Gear Strive",
+    "Marvel's Spider-Man: Miles Morales",
+    "Demon's Souls",
+    "Persona 5 Royal",
+    "Yakuza: Like a Dragon",
+    "Assassin's Creed Odyssey",
+    "Assassin's Creed Origins",
+    "Assassin's Creed: Odyssey",
+    "Watch Dogs: Legion",
+    "The Division 2",
+    "Tom Clancy's Rainbow Six Siege",
+    "Tom Clancy's The Division 2",
+    "Far Cry 5",
+    "Far Cry: New Dawn",
+    "For Honor",
+    "Tom Clancy's Ghost Recon Breakpoint"
+};
+
+    cout << "Top 10 Games:\n";
+    for (int i = 0; i < 10; i++) {
+        int randomIndex = rand() % gameNames.size();
+        cout << gameNames[randomIndex] << endl;
+        gameNames.erase(gameNames.begin() + randomIndex);
+    }
+
+
+}
