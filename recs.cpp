@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <vector>
 using namespace std;
 
 void search();
@@ -10,8 +11,10 @@ void after_login(); // function to run after login is succesfull, should be modi
 void login();
 void signin();
 void forgot();
-void library();
+void library(string gam,string pri);
 void wallet();
+void addgame(string g,string p);
+void viewlib();
 
 void logo(string filename)
 {
@@ -84,20 +87,33 @@ void search() {
       while(!game_finder.eof()){
         game_finder >> game >> price >> genre;
         if( game == game_name){
+            string yesno;
             cout << "The game you searched for is : " << game << " Price : " << price;
-            cout << " Genre : " << genre;
+            cout << " Genre : " << genre <<endl;;
             found = true;
+            cout<<" Add Game?  (y/n)" <<endl;
+            cin>>yesno;
+            if(yesno=="y")
+            {
+                library(game,price);
+            }
+            else
+            {
+                after_login();
+            }
             break;
         }
       }
       if (found==false){
         cout << "Game is not in the database!";
+        after_login();
       }
     }
     else {
         cout << "Games database is empty!";
+        after_login();
     }
-    after_login();
+    
 
 }
 void game_rec()
@@ -169,15 +185,18 @@ void login()
     cin >> userID;
     cout << "\t\t\t PASSWORD ";
     cin >> password;
+    string line;
+    fstream input("records.txt");
 
-    ifstream input("records.txt");
-
-    while (input >> id >> pass >> wal)
+    while (getline(input,line))
     {
+        istringstream iss(line);
+        iss>>id>>pass>>wal;
+        cout<<id<<" "<<pass<< " "<<wal<<endl;
         if (id == userID && pass == password)
         {
             count = 1;
-            system("cls");
+            break;
         }
     }
     input.close();
@@ -268,6 +287,9 @@ void forgot()
 
 void wallet()
 {
+    ofstream oss;
+    oss.open("temp.txt",ofstream::out | ofstream::trunc);
+    oss.close();
     cout<<"xxxxxxxxxxxxxxxx WALLET FEATURES XXXXXXXXXXXXXXXXXXXXXX "<<endl;
     cout<<" 1. View Wallet Balance"<<endl;
     cout<<" 2. Add Balance"<< endl;
@@ -326,29 +348,159 @@ void wallet()
             {
                 file3<<line2<<endl;
             }
+            file.close();
+            file2.close();
+            file3.close();
 
 }
         }
 
 
-            
-/*void library()
+void library(string gam,string pri)
 {
     cout<<"OPTIONS: "<<endl;
-    cout<<"1. BUY GAME AND ADD TO LIBRARY"<<endl;
-    cout<<"2. REMOVE GAME FROM LIBRARY"<<endl;
-    cout<<"3. BACK"<<endl;
+    cout<<"1. VIEW LIBRARY"<<endl;
+    cout<<"2. BUY GAME AND ADD TO LIBRARY"<<endl;
+    cout<<"3. REMOVE GAME FROM LIBRARY"<<endl;
+    cout<<"4. BACK"<<endl;
     cout<<"Enter your choice: "<<endl;
     int ch;
     cin>>ch;
     switch(ch)
     {
         case 1:
-        ofstream f1("records.txt", ios::app);
-        f1 << suserID << ' ' << spassword << endl;
-        system("cls");
+            viewlib();
+            break;
+        case 2:
+            addgame(gam,pri);
+            break;
+
+
 
     }
 
 
-}*/
+}
+
+void addgame(string g, string p)
+{
+string filen="records.txt";
+fstream file(filen);
+string line;
+string a,b,c,cedit;
+string input=userID;
+fstream tempfile("gametemp.txt");
+string a2,b2,c2;
+
+while(getline(file,line))
+{
+    istringstream linevar(line);
+    linevar >> a >> b >>c;
+    if(a!=input)
+    {
+        tempfile<<line<<"\n";   
+    }
+    else
+    {
+        c2=c;
+        stringstream ss(line);
+        stringstream updated;
+        string w;
+        vector <string> words;
+        int num;
+        num=stoi(c2);
+        int price=stoi(p);
+        num=num-price;
+        string c3=to_string(num);       
+        while (ss >> w) 
+        {
+            words.push_back(w);
+        }
+        words[2]=c3;
+        for(int i=0; i<words.size();i++)
+        {
+            updated << words[i]<<" ";
+            if (i != words.size() - 1) 
+            {
+                ss << " "; 
+            }
+        }
+        string updatedsentence=updated.str();
+        tempfile << updatedsentence << g <<endl;;
+    }
+        
+
+    }
+
+    tempfile.close();
+    file.close();
+    ofstream ofs,ofs1;
+    ofs.open("records.txt",ofstream::out | ofstream::trunc);
+    ofs.close();
+    fstream file2("gametemp.txt");
+    string line2;
+    fstream file3("records.txt");
+    while(getline(file2,line2))
+    {
+        file3<<line2<<endl;
+    }
+        ofs1.open("temp.txt",ofstream::out | ofstream::trunc);
+        ofs1.close();
+    }
+
+void viewlib()
+{
+    string filen="library.txt";
+    fstream file(filen);
+    string line;
+    string a,b,c,cedit;
+    string input=userID;
+    fstream tempfile("gametemp.txt");
+    string a2,b2,c2;
+
+    while(getline(file,line))
+    {
+        istringstream linevar(line);
+        linevar >> a >> b >>c;
+        if(a==input)
+        {
+            stringstream ss(line);
+            string w;
+            vector <string> words;       
+            while (ss >> w) 
+            {
+                words.push_back(w);
+            }
+
+            cout<<" LIBRARY OF USER: "<< a <<endl;
+            for(int i=3; i<words.size();i++)
+            {
+                cout<<words[i]<<endl;
+            }
+            cout<<"-----------------------";
+            }
+        else
+        {
+            c2=c;
+            stringstream ss(line);
+            stringstream print;
+            string w;
+            vector <string> words;       
+            while (ss >> w) 
+            {
+                words.push_back(w);
+            }
+            for(int i=0; i<words.size();i++)
+            {
+                print << words[i];
+                if (i != words.size() - 1) 
+                {
+                    print << " "; 
+                }
+        }
+            a2=a;
+            b2=b;
+            /*tempfile<<line<<"hello";*/
+        }
+    }
+}
